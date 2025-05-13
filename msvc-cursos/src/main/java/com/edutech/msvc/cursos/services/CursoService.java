@@ -1,4 +1,11 @@
 package com.edutech.msvc.cursos.services;
 
-public class CursoService {
+import com.edutech.msvc.cursos.models.Curso;
+
+import java.util.List;
+
+public interface CursoService {
+    List<Curso> findAll();
+    Curso findById(Long id);
+    Curso save(Curso curso);
 }
