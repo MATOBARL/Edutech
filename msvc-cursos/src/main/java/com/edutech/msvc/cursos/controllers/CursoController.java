@@ -20,17 +20,39 @@ public class CursoController {
 
     @GetMapping
     public ResponseEntity<List<Curso>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.cursoService.findAll());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.cursoService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Curso> findById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(this.cursoService.findById(id));
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.cursoService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Curso> save(@Valid @RequestBody Curso curso) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.cursoService.save(curso));
+    public ResponseEntity<Curso> save(@Valid @RequestBody Curso cursoNew) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.cursoService.save(cursoNew));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Curso> updateById(@PathVariable Long id, @RequestBody Curso cursoUpdated){
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(cursoService.updateById(id,cursoUpdated));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        cursoService.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+    }
+
 }
 

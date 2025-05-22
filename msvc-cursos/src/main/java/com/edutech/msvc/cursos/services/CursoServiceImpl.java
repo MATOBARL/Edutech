@@ -5,6 +5,7 @@ import com.edutech.msvc.cursos.models.Curso;
 import com.edutech.msvc.cursos.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,11 +26,29 @@ public class CursoServiceImpl implements CursoService{
     }
 
     @Override
-    public Curso save(Curso curso) {
+    public Curso save(Curso cursoNew) {
+        Curso curso = new Curso();
+        curso.setContenido(cursoNew.getContenido());
         if(this.cursoRepository.findByContenido(curso.getContenido()).isPresent()) {
             throw new CursoException("El curso con el contenido: " + curso.getContenido()
                     + " ya existe en la base de datos");
         }
         return this.cursoRepository.save(curso);
+    }
+
+    @Override
+    public Curso updateById(Long id, Curso cursoUpdated){
+        return cursoRepository.findById(id).map( curso -> {
+            curso.setContenido(cursoUpdated.getContenido());
+            // Update
+            return cursoRepository.save(curso);
+        }).orElseThrow(
+                () -> new CursoException("El curso con el id: " + id+" no se encuentra en la base de datos")
+        );
+    }
+
+    @Override
+    public void deleteById(Long id){
+        cursoRepository.deleteById(id);
     }
 }

@@ -7,5 +7,7 @@ import java.util.List;
 public interface CursoService {
     List<Curso> findAll();
     Curso findById(Long id);
-    Curso save(Curso curso);
+    Curso save(Curso cursoNew);
+    Curso updateById(Long id, Curso cursoUpdated);
+    void deleteById(Long id);
 }

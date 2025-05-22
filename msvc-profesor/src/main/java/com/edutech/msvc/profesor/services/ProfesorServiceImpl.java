@@ -25,11 +25,29 @@ public class ProfesorServiceImpl implements ProfesorService{
     }
 
     @Override
-    public Profesor save(Profesor profesor) {
+    public Profesor save(Profesor profesorNew) {
+        Profesor profesor = new Profesor();
+        profesor.setNombre(profesorNew.getNombre());
         if(this.profesorRepository.findByNombre(profesor.getNombre()).isPresent()) {
             throw new ProfesorException("El profesor con el nombre: " + profesor.getNombre()
                     + " ya existe en la base de datos");
         }
         return this.profesorRepository.save(profesor);
+    }
+
+    @Override
+    public Profesor updateById(Long id, Profesor profesorUpdated){
+        return profesorRepository.findById(id).map( profesor -> {
+            profesor.setNombre(profesorUpdated.getNombre());
+            // Update
+            return profesorRepository.save(profesor);
+        }).orElseThrow(
+                () -> new ProfesorException("El profesor con el id: " + id+" no se encuentra en la base de datos")
+        );
+    }
+
+    @Override
+    public void deleteById(Long id){
+        profesorRepository.deleteById(id);
     }
 }

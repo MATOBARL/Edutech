@@ -20,17 +20,38 @@ public class ProfesorController {
 
     @GetMapping
     public ResponseEntity<List<Profesor>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(this.profesorService.findAll());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.profesorService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Profesor> findById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(this.profesorService.findById(id));
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.profesorService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<Profesor> save(@Valid @RequestBody Profesor profesor) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.profesorService.save(profesor));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.profesorService.save(profesor));
     }
-}
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Profesor> updateById(@PathVariable Long id, @RequestBody Profesor profesorUpdated){
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(profesorService.updateById(id,profesorUpdated));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        profesorService.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+    }
+
+}
