@@ -26,6 +26,13 @@ public class CursoServiceImpl implements CursoService{
     }
 
     @Override
+    public Curso findByIdProfesor(Long idProfesor) {
+        return this.cursoRepository.findById(idProfesor).orElseThrow(
+                () -> new CursoException("El curso con el profesor: " + idProfesor+" no se encuentra en la base de datos")
+        );
+    }
+
+    @Override
     public Curso save(Curso cursoNew) {
         Curso curso = new Curso();
         curso.setContenido(cursoNew.getContenido());

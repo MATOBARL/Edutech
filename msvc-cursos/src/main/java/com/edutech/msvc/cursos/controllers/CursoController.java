@@ -32,6 +32,13 @@ public class CursoController {
                 .body(this.cursoService.findById(id));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Curso> findByIdProfesor(@PathVariable Long idProfesor) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.cursoService.findById(idProfesor));
+    }
+
     @PostMapping
     public ResponseEntity<Curso> save(@Valid @RequestBody Curso cursoNew) {
         return ResponseEntity
