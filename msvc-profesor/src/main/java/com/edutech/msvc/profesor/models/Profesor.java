@@ -13,7 +13,7 @@ public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_profesor")
-    private Long idCurso;
+    private Long idProfesor;
 
     @Column(nullable = false)
     @NotEmpty(message = "El profesor tiene que tener un nombre")
