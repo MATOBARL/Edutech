@@ -2,6 +2,10 @@ package com.edutech.msvc.profesor.controllers;
 
 import com.edutech.msvc.profesor.models.Profesor;
 import com.edutech.msvc.profesor.services.ProfesorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +18,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/profesor")
 @Validated
+@Tag(name = "Profesores", description = "Esta secciób contiene los CRUD de profesores")
 public class ProfesorController {
     @Autowired
     private ProfesorService profesorService;
 
     @GetMapping
+    @Operation(
+            summary = "Devuelve todos los profesores",
+            description = "Este metodo debe retornar un List de Profesor," +
+                    "en caso de que no encuentre nada, retorna una List vacia"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Se retornaron todos los profesores.")
+    })
     public ResponseEntity<List<Profesor>> findAll() {
         return ResponseEntity
                 .status(HttpStatus.OK)
