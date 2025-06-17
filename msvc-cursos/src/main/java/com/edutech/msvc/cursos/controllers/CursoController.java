@@ -1,6 +1,6 @@
 package com.edutech.msvc.cursos.controllers;
 
-import com.edutech.msvc.cursos.models.Curso;
+import com.edutech.msvc.cursos.models.entities.Curso;
 import com.edutech.msvc.cursos.services.CursoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +32,6 @@ public class CursoController {
                 .body(this.cursoService.findById(id));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Curso> findByIdProfesor(@PathVariable Long idProfesor) {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.cursoService.findById(idProfesor));
-    }
-
     @PostMapping
     public ResponseEntity<Curso> save(@Valid @RequestBody Curso cursoNew) {
         return ResponseEntity
@@ -61,5 +54,9 @@ public class CursoController {
                 .build();
     }
 
+    @GetMapping("/profesor/{id}")
+    public ResponseEntity<List<Curso>> findByIdProfesor(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.cursoService.findbyProfesorId(id));
+    }
 }
 

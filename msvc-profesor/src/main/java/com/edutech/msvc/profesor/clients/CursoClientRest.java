@@ -11,5 +11,5 @@ import java.util.List;
 public interface CursoClientRest {
 
     @GetMapping("/{id}")
-    Curso findById(@PathVariable Long id);
+    List<Curso> findByIdProfesor(@PathVariable Long id);
 }

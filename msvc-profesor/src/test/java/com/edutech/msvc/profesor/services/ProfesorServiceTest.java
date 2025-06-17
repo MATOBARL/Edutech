@@ -1,7 +1,7 @@
 package com.edutech.msvc.profesor.services;
 
 import com.edutech.msvc.profesor.exceptions.ProfesorException;
-import com.edutech.msvc.profesor.models.Profesor;
+import com.edutech.msvc.profesor.models.entities.Profesor;
 import com.edutech.msvc.profesor.repositories.ProfesorRepository;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;

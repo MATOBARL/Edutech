@@ -1,6 +1,6 @@
 package com.edutech.msvc.profesor.controllers;
 
-import com.edutech.msvc.profesor.models.Profesor;
+import com.edutech.msvc.profesor.models.entities.Profesor;
 import com.edutech.msvc.profesor.services.ProfesorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

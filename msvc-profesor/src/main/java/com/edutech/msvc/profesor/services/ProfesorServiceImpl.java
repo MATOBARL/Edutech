@@ -1,8 +1,12 @@
 package com.edutech.msvc.profesor.services;
 
+import com.edutech.msvc.profesor.clients.CursoClientRest;
+import com.edutech.msvc.profesor.dtos.CursoProfesorDTO;
 import com.edutech.msvc.profesor.exceptions.ProfesorException;
-import com.edutech.msvc.profesor.models.Profesor;
+import com.edutech.msvc.profesor.models.Curso;
+import com.edutech.msvc.profesor.models.entities.Profesor;
 import com.edutech.msvc.profesor.repositories.ProfesorRepository;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +16,9 @@ import java.util.List;
 public class ProfesorServiceImpl implements ProfesorService{
     @Autowired
     private ProfesorRepository profesorRepository;
+
+    @Autowired
+    private CursoClientRest cursoClientRest;
 
     @Override
     public List<Profesor> findAll() { return this.profesorRepository.findAll();
@@ -49,5 +56,28 @@ public class ProfesorServiceImpl implements ProfesorService{
     @Override
     public void deleteById(Long id){
         profesorRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CursoProfesorDTO> findCursosById(Long profesorId) {
+        // Agregamos esto en caso que no exista el profesor que estamos buscado la app pueda realizar la excepcion
+        Profesor profesor = this.findById(profesorId);
+        // Con esto podemos obtener le listado de cursos que posee el profesor
+        List<Curso> atenciones = this.cursoClientRest.findByIdProfesor(profesor.getIdProfesor());
+
+        // De esta forma nos aseguramos que exista el listado de cursos de un profesor si no no tiene sentido
+        // realizar el procesamiento de información
+        if(!cursos.isEmpty()){
+            return cursos.stream().map(curso -> {
+
+                CursoProfesorDTO dto = new CursoProfesorDTO();
+                dto.setIdProfesor(profesorId);
+                dto.setContenido(curso.setContenido());
+
+                return dto;
+            }).toList();
+        }
+
+        return List.of();
     }
 }

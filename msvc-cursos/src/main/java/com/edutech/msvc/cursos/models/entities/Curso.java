@@ -1,4 +1,4 @@
-package com.edutech.msvc.cursos.models;
+package com.edutech.msvc.cursos.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

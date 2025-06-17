@@ -1,6 +1,6 @@
 package com.edutech.msvc.profesor.repositories;
 
-import com.edutech.msvc.profesor.models.Profesor;
+import com.edutech.msvc.profesor.models.entities.Profesor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
