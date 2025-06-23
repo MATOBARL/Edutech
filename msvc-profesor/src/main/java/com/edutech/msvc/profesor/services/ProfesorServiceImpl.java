@@ -63,7 +63,7 @@ public class ProfesorServiceImpl implements ProfesorService{
         // Agregamos esto en caso que no exista el profesor que estamos buscado la app pueda realizar la excepcion
         Profesor profesor = this.findById(profesorId);
         // Con esto podemos obtener le listado de cursos que posee el profesor
-        List<Curso> atenciones = this.cursoClientRest.findByIdProfesor(profesor.getIdProfesor());
+        List<Curso> cursos = this.cursoClientRest.findByIdProfesor(profesor.getIdProfesor());
 
         // De esta forma nos aseguramos que exista el listado de cursos de un profesor si no no tiene sentido
         // realizar el procesamiento de información
@@ -72,7 +72,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 
                 CursoProfesorDTO dto = new CursoProfesorDTO();
                 dto.setIdProfesor(profesorId);
-                dto.setContenido(curso.setContenido());
+                dto.setContenido(curso.getContenido());
 
                 return dto;
             }).toList();
