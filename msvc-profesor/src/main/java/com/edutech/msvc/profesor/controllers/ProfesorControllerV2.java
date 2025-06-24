@@ -96,13 +96,13 @@ public class ProfesorControllerV2 {
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Error cuando el medico con cierto id no existe",
+                    description = "Error cuando el profesor con cierto id no existe",
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = ErrorDTO.class)
                             //examples = @ExampleObject(
                             //        name = "ERROR NOT FOUND",
-                            //        value = "{\"status\":\"200\", \"error\":\"medico no encontrado\"}"
+                            //        value = "{\"status\":\"200\", \"error\":\"profesor no encontrado\"}"
                             //)
                     )
             )

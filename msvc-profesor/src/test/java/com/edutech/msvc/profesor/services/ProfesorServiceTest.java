@@ -73,7 +73,7 @@ public class ProfesorServiceTest {
 
     @Test
     @DisplayName("Debe encontrar un profesor por id")
-    public void shouldFindMEdicoById(){
+    public void shouldFindProfesorById(){
         when(profesorRepository.findById(1L)).thenReturn(Optional.of(this.profesorPrueba));
         Profesor result = profesorService.findById(1L);
         assertThat(result).isNotNull();
